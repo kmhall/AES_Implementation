@@ -2,9 +2,7 @@ public class CipherKey {
 
     int[] cipherKeyArr;
 
-
     public CipherKey(String cipherKey) {
-
         cipherKeyArr = hexStringToIntArray(cipherKey.replaceAll("\\s+",""));
     }
 

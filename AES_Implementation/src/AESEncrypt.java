@@ -9,19 +9,31 @@ public class AESEncrypt {
         cipherKey = new CipherKey(cipherKeyStr);
 
         //curState.printAsHex();
-
     }
 
     void encrypt(){
+        //Tests are NIST Appendix B Round 1
+        String input; State before;
+        String output; State after;
 
-        curState.printAsInt();
+        //Testing SubBytes
+        input = "193de3bea0f4e22b9ac68d2ae9f84808";
+        before = new State(input);
+        output = "d42711aee0bf98f1b8b45de51e415230";
+        after = new State(output);
 
-        curState.shiftRows();
+        before.subBytes();
+        System.out.println("SubBytes: " + before.equals(after));
 
-        curState.printAsInt();
 
-        //All encrypt steps done here
+        //Testing ShiftRow
+        input = "d42711aee0bf98f1b8b45de51e415230";
+        before = new State(input);
+        output = "d4bf5d30e0b452aeb84111f11e2798e5";
+        after = new State(output);
 
+        before.shiftRows();
+        System.out.println("ShiftRows: " + before.equals(after));
     }
 
 
