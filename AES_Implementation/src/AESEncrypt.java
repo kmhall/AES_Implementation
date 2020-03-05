@@ -4,14 +4,15 @@ public class AESEncrypt {
     State curState;
 
     public AESEncrypt(String inputStr, String cipherKeyStr) {
-
         curState = new State(inputStr);
         cipherKey = new CipherKey(cipherKeyStr);
-
-        //curState.printAsHex();
     }
 
     void encrypt(){
+        testEncrypt();
+    }
+
+    void testEncrypt(){
         //Tests are NIST Appendix B Round 1
         String input; State before;
         String output; State after;
@@ -35,13 +36,15 @@ public class AESEncrypt {
         before.shiftRows();
         System.out.println("ShiftRows: " + before.equals(after));
 
-        //Testing MixColumns
+        /*Testing MixColumns
         input = "d4bf5d30e0b452aeb84111f11e2798e5";
         before = new State(input);
         output = "046681e5e0cb199a48f8d37a2806264c";
         after = new State(output);
 
+
         before.shiftRows();
         System.out.println("MixColumns: " + before.equals(after));
+        */
     }
 }
