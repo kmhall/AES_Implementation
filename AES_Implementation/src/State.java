@@ -5,6 +5,9 @@ public class State extends Matrix{
     //State values are converted from hex to int.
     int[][] sBox;
 
+    //Inverse sBox;
+    int[][] invSBox;
+
     public State(String input) {
         super(input);
 
@@ -17,6 +20,29 @@ public class State extends Matrix{
         for(int col = 0; col< 16; col++){
             for(int row = 0; row < 16; row ++){
                 sBox[row][col] = tmpArr[count];
+                count ++;
+            }
+        }
+
+        //Initialize invSBox
+        invSBox = new int[16][16];
+        count = 0;
+        String hex;
+        int newRow;
+        int newCol;
+        for(int col = 0; col< 16; col++){
+            for(int row = 0; row < 16; row ++){
+                hex = Integer.toHexString(tmpArr[count]);
+                if(hex.length() == 1){
+                    hex = "0"+ hex;
+                }
+
+                newRow = Integer.parseInt(String.valueOf(hex.charAt(0)),16);
+                newCol = Integer.parseInt(String.valueOf(hex.charAt(1)),16);
+
+                hex = Integer.toHexString(row) + Integer.toHexString(col);
+
+                invSBox[newRow][newCol] = Integer.parseInt(hex, 16);
                 count ++;
             }
         }
@@ -89,7 +115,19 @@ public class State extends Matrix{
         return -1;
     }
 
+    public void invSubBytes(){
 
+    }
 
+    public void invShiftRows(){
+
+        for(int row = 1; row < matrix.length; row++){
+            int[] tmp = Arrays.copyOf(matrix[row],4);
+
+            for(int col = 0; col < matrix[0].length; col++){
+                matrix[row][(col+(matrix[0].length + row)) % matrix.length ] = tmp[col];
+            }
+        }
+    }
 
 }
