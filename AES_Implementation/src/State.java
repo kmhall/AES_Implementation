@@ -116,7 +116,21 @@ public class State extends Matrix{
     }
 
     public void invSubBytes(){
+        int invSBoxRow; int invSBoxCol;
+        for(int col = 0; col< 4; col++){
+            for(int row = 0; row < 4; row ++){
 
+                String hexVal = Integer.toHexString(matrix[row][col]);
+                if(hexVal.length() == 1){
+                    hexVal = "0"+ hexVal;
+                }
+
+                invSBoxRow = subBytesHelper(Character.toString(hexVal.charAt(0)));
+                invSBoxCol = subBytesHelper(Character.toString(hexVal.charAt(1)));
+
+                matrix[row][col] = invSBox[invSBoxRow][invSBoxCol];
+            }
+        }
     }
 
     public void invShiftRows(){
