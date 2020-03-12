@@ -40,7 +40,7 @@ public class AESDecrypt {
         output = "4773b91ff72f354361cb018ea1e6cf2c";
         after = new State(output);
 
-        //before.invMixCol();
+        before.invMixCol();
         System.out.println("InvMixCol: " + before.equals(after));
     }
 }

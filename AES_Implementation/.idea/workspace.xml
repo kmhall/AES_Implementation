@@ -4,6 +4,7 @@
     <list default="true" id="47060efc-61fc-4734-a700-4ca43d31e5a2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AESDecrypt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AESDecrypt.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Matrix.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Matrix.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/State.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -64,7 +65,7 @@
       <workItem from="1583861464882" duration="8107000" />
       <workItem from="1584034445761" duration="57000" />
       <workItem from="1584034755190" duration="12000" />
-      <workItem from="1584034789756" duration="1350000" />
+      <workItem from="1584034789756" duration="4425000" />
     </task>
     <servers />
   </component>

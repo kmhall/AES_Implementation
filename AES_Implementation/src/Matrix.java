@@ -1,7 +1,6 @@
 public class Matrix {
     int matrix[][];
 
-
     public Matrix(String input) {
         matrix = new int[4][4];
 
