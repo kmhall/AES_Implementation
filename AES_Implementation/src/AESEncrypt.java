@@ -36,15 +36,20 @@ public class AESEncrypt {
         before.shiftRows();
         System.out.println("ShiftRows: " + before.equals(after));
 
-        /*Testing MixColumns
+        //Testing MixColumns
         input = "d4bf5d30e0b452aeb84111f11e2798e5";
         before = new State(input);
         output = "046681e5e0cb199a48f8d37a2806264c";
         after = new State(output);
 
 
-        before.shiftRows();
+        before.mixColumns();
+        before.printAsHex();
         System.out.println("MixColumns: " + before.equals(after));
-         */
+
+        after.printAsHex();
+
+
+
     }
 }
