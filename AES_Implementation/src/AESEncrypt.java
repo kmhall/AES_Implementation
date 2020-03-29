@@ -44,10 +44,8 @@ public class AESEncrypt {
 
 
         before.mixColumns();
-        before.printAsHex();
         System.out.println("MixColumns: " + before.equals(after));
 
-        after.printAsHex();
 
 
 

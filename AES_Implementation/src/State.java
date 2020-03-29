@@ -82,21 +82,13 @@ public class State extends Matrix{
         //Matrix multiplication
         for(int i = 0; i<4;i++){
             int col[] = super.getColumn(i);
-
-
-            //Mix col res doesn't have correct val
             int mixColResult[] = mixColumnsHelper(col);
-
             super.replaceCol(i, mixColResult);
-            //super.printAsHex();
-        }
-
-
+         }
     }
 
     public int[] mixColumnsHelper(int[] col){
         int[] resultingCol = new int[4];
-
         
         resultingCol[0] = reduce(GFMult(2,col[0]) ^ GFMult(3,col[1]) ^ col[2] ^ col[3]);
         resultingCol[1] = reduce(col[0] ^ GFMult(2,col[1]) ^ GFMult(3,col[2]) ^ col[3]);
@@ -105,15 +97,9 @@ public class State extends Matrix{
         return resultingCol;
     }
 
-    //x^4 +1 in binary is 17
     public int GFMult(int x, int y){
 
-        //X is shorter
-        String xStr = Integer.toBinaryString(x);
         String yStr = Integer.toBinaryString(y);
-
-        //System.out.print("0x"+Integer.toHexString(x) + " 0x" + Integer.toHexString(y) + "\n");
-        //System.out.print(xStr + " " + yStr + "\n");
 
         int posVal = -1;
         int count = 0;
@@ -128,43 +114,10 @@ public class State extends Matrix{
 
                     numBeforeMod = numBeforeMod ^ posVal;
                 }
-                //System.out.println(posVal);
             }
             count++;
         }
-
-        //System.out.println(" " + Integer.toBinaryString(numBeforeMod));
-
-        int dividend = numBeforeMod;
-        int divisor = 283;
-
-        //System.out.println("^" + Integer.toBinaryString(divisor));
-
-        while(dividend > divisor){
-            String curDiv = Integer.toBinaryString(dividend);
-            String firstPart = curDiv.substring(0,9);
-            String secondPart = curDiv.substring(9);
-
-            //System.out.println("First part " +firstPart);
-            //System.out.println("Second Part " +secondPart);
-
-            int f = Integer.parseInt(firstPart, 2);
-
-            int xor = f ^ divisor;
-            //System.out.println("XOR result " + Integer.toBinaryString(xor));
-
-            String xorPart = Integer.toBinaryString(xor);
-            String combined = xorPart + secondPart;
-
-            //System.out.println("XOR Combined with previous last " + combined);
-
-            dividend = Integer.parseInt(combined, 2);
-            //System.out.println(" " + Integer.toBinaryString(dividend));
-            //System.out.println("^" + Integer.toBinaryString(divisor));
-
-        }
-
-        return dividend;
+        return reduce(numBeforeMod);
     }
 
     public int reduce(int x){
@@ -177,25 +130,13 @@ public class State extends Matrix{
             String firstPart = curDiv.substring(0,9);
             String secondPart = curDiv.substring(9);
 
-            //System.out.println("First part " +firstPart);
-            //System.out.println("Second Part " +secondPart);
-
             int f = Integer.parseInt(firstPart, 2);
-
             int xor = f ^ divisor;
-            //System.out.println("XOR result " + Integer.toBinaryString(xor));
 
             String xorPart = Integer.toBinaryString(xor);
             String combined = xorPart + secondPart;
-
-            //System.out.println("XOR Combined with previous last " + combined);
-
             dividend = Integer.parseInt(combined, 2);
-            //System.out.println(" " + Integer.toBinaryString(dividend));
-            //System.out.println("^" + Integer.toBinaryString(divisor));
-
         }
-
         return dividend;
     }
 
