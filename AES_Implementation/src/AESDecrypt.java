@@ -1,10 +1,10 @@
 public class AESDecrypt {
     State curState;
-    String text;
+    CipherKey cipherKey;
 
     public AESDecrypt(String key, String cipherText){
         curState = new State(cipherText);
-        text = cipherText;
+        cipherKey = new CipherKey(key);
     }
 
     void decrypt(){
