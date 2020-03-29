@@ -1,3 +1,4 @@
+import java.math.BigInteger;
 import java.util.Arrays;
 
 public class State extends Matrix{
@@ -76,6 +77,70 @@ public class State extends Matrix{
             }
         }
     }
+
+    public void mixColumns(){
+        //Matrix multiplication
+        for(int i = 0; i<4;i++){
+            int col[] = super.getColumn(i);
+            int mixColResult[] = mixColumnsHelper(col);
+            super.replaceCol(i, mixColResult);
+         }
+    }
+
+    public int[] mixColumnsHelper(int[] col){
+        int[] resultingCol = new int[4];
+        
+        resultingCol[0] = reduce(GFMult(2,col[0]) ^ GFMult(3,col[1]) ^ col[2] ^ col[3]);
+        resultingCol[1] = reduce(col[0] ^ GFMult(2,col[1]) ^ GFMult(3,col[2]) ^ col[3]);
+        resultingCol[2] = reduce(col[0] ^ col[1] ^ GFMult(2,col[2]) ^ GFMult(3,col[3]));
+        resultingCol[3] = reduce(GFMult(3,col[0]) ^ col[1] ^ col[2] ^ GFMult(2,col[3]));
+        return resultingCol;
+    }
+
+    public int GFMult(int x, int y){
+
+        String yStr = Integer.toBinaryString(y);
+
+        int posVal = -1;
+        int count = 0;
+        int numBeforeMod = -1;
+        for(int i = yStr.length()-1; i>= 0; i--){
+            if(yStr.charAt(i) == '1'){
+                if(posVal == -1){
+                    posVal = (int)Math.pow(2,count) * x;
+                    numBeforeMod = posVal;
+                }else{
+                    posVal = (int)Math.pow(2,count) * x;
+
+                    numBeforeMod = numBeforeMod ^ posVal;
+                }
+            }
+            count++;
+        }
+        return reduce(numBeforeMod);
+    }
+
+    public int reduce(int x){
+
+        int dividend = x;
+        int divisor = 283;
+
+        while(dividend > divisor){
+            String curDiv = Integer.toBinaryString(dividend);
+            String firstPart = curDiv.substring(0,9);
+            String secondPart = curDiv.substring(9);
+
+            int f = Integer.parseInt(firstPart, 2);
+            int xor = f ^ divisor;
+
+            String xorPart = Integer.toBinaryString(xor);
+            String combined = xorPart + secondPart;
+            dividend = Integer.parseInt(combined, 2);
+        }
+        return dividend;
+    }
+
+
 
     public int subBytesHelper(String s){
         switch (s){
