@@ -98,10 +98,10 @@ public class State extends Matrix{
         int[] resultingCol = new int[4];
 
         
-        resultingCol[0] = GFMult(2,col[0]) ^ GFMult(3,col[1]) ^ col[2] ^ col[3];
-        resultingCol[1] = col[0] ^ GFMult(2,col[1]) ^ GFMult(3,col[2]) ^ col[3];
-        resultingCol[2] = col[0] ^ col[1] ^ GFMult(2,col[2]) ^ GFMult(3,col[3]);
-        resultingCol[3] = GFMult(3,col[0]) ^ col[1] ^ col[2] ^ GFMult(2,col[3]);
+        resultingCol[0] = reduce(GFMult(2,col[0]) ^ GFMult(3,col[1]) ^ col[2] ^ col[3]);
+        resultingCol[1] = reduce(col[0] ^ GFMult(2,col[1]) ^ GFMult(3,col[2]) ^ col[3]);
+        resultingCol[2] = reduce(col[0] ^ col[1] ^ GFMult(2,col[2]) ^ GFMult(3,col[3]));
+        resultingCol[3] = reduce(GFMult(3,col[0]) ^ col[1] ^ col[2] ^ GFMult(2,col[3]));
         return resultingCol;
     }
 
@@ -164,7 +164,39 @@ public class State extends Matrix{
 
         }
 
-        return dividend ^ divisor;
+        return dividend;
+    }
+
+    public int reduce(int x){
+
+        int dividend = x;
+        int divisor = 283;
+
+        while(dividend > divisor){
+            String curDiv = Integer.toBinaryString(dividend);
+            String firstPart = curDiv.substring(0,9);
+            String secondPart = curDiv.substring(9);
+
+            //System.out.println("First part " +firstPart);
+            //System.out.println("Second Part " +secondPart);
+
+            int f = Integer.parseInt(firstPart, 2);
+
+            int xor = f ^ divisor;
+            //System.out.println("XOR result " + Integer.toBinaryString(xor));
+
+            String xorPart = Integer.toBinaryString(xor);
+            String combined = xorPart + secondPart;
+
+            //System.out.println("XOR Combined with previous last " + combined);
+
+            dividend = Integer.parseInt(combined, 2);
+            //System.out.println(" " + Integer.toBinaryString(dividend));
+            //System.out.println("^" + Integer.toBinaryString(divisor));
+
+        }
+
+        return dividend;
     }
 
 
