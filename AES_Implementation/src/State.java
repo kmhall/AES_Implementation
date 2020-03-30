@@ -49,6 +49,14 @@ public class State extends Matrix{
         }
     }
 
+    public void addRoundKey(int[][] roundKey){
+        for (int col = 0; col < 4; col++){
+            for (int row = 0; row < 4; row++){
+                matrix[row][col] = matrix[row][col] ^ roundKey[row][col];
+            }
+        }
+    }
+
     public void shiftRows(){
 
         for(int row = 1; row < matrix.length; row++){
@@ -225,6 +233,4 @@ public class State extends Matrix{
         resultingCol[3] = reduce(GFMult(11,col[0]) ^ GFMult(13,col[1]) ^ GFMult(9,col[2]) ^ GFMult(14,col[3]));
         return resultingCol;
     }
-
-
 }

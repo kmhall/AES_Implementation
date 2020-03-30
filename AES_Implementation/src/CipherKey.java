@@ -60,7 +60,7 @@ public class CipherKey{
 
             if (count % 4 == 0){
                 for(int row = 0; row < 4; row ++){
-                    xOr[row] = roundKeys[row][count/4];
+                    xOr[row] = rcon[row][count/4 - 1];
                 }
                 temp = xOrFunc(subWord(rotWord(temp)), xOr);
             }
@@ -110,5 +110,19 @@ public class CipherKey{
         temp[2] = word[2] ^ xOrWord[2];
         temp[3] = word[3] ^ xOrWord[3];
         return temp;
+    }
+
+    public int[][] getSpecificRoundKey(int round){
+        int[][] roundKey = new int[4][4];
+
+        int index = (4*(round));
+        int count = 0;
+        for (int col = index; col < index + 4; col++){
+            for (int row = 0; row < 4; row ++){
+                roundKey[row][count] = roundKeys[row][col];
+            }
+            count++;
+        }
+        return roundKey;
     }
 }
