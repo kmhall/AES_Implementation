@@ -140,7 +140,7 @@ public class State extends Matrix{
         return dividend;
     }
 
-    public int subBytesHelper(String s){
+    public static int subBytesHelper(String s){
         switch (s){
             case "0":
                 return 0;
