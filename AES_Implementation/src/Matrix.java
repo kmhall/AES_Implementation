@@ -40,6 +40,22 @@ public class Matrix {
 
     }
 
+    public String printAsHexOneLine(){
+        String str = "";
+        for(int i = 0; i < 4; i++){
+            int[] col = getColumn(i);
+            for(int j=0;j<col.length;j++){
+                String tmp = Integer.toHexString(col[j]);
+                if(tmp.length() == 1){
+                    tmp = "0" + tmp;
+                }
+                str += tmp;
+            }
+        }
+        return str;
+    }
+
+
     public void printAsInt(){
         for(int row = 0; row < 4; row++){
             System.out.print("[");
