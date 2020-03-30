@@ -15,7 +15,7 @@ public class Matrix {
         }
     }
 
-    public int[] hexStringToIntArray(String s) {
+    public static int[] hexStringToIntArray(String s) {
         int len = s.length();
         int[] data = new int[len / 2];
         for (int i = 0; i < len; i += 2) {
