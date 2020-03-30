@@ -10,8 +10,11 @@ public class AESEncrypt {
 
     void encrypt(){
         String output; State after;
-        output = "3925841d02dc09fbdc118597196a0b32";
-        after = new State(output);
+        //output = "3925841d02dc09fbdc118597196a0b32";
+        //after = new State(output);
+
+        String output2 = "69c4e0d86a7b0430d8cdb78070b4c55a";
+        after = new State(output2);
 
         int[][] roundKey = cipherKey.getSpecificRoundKey(0);
         curState.addRoundKey(roundKey);
@@ -21,15 +24,18 @@ public class AESEncrypt {
 
             curState.subBytes();
             curState.shiftRows();
-            if (i == 4) {
-                curState.printAsHex();
-            }
+
+            //curState.printAsHex();
+
             curState.mixColumns();
-            if (i == 4) {
-                curState.printAsHex();
-            }
+
+            //curState.printAsHex();
+
             roundKey = cipherKey.getSpecificRoundKey(i);
             curState.addRoundKey(roundKey);
+
+            curState.printAsHex();
+
         }
 
         curState.subBytes();

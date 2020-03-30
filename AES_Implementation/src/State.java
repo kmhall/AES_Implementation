@@ -103,8 +103,17 @@ public class State extends Matrix{
         resultingCol[2] = reduce(col[0] ^ col[1] ^ GFMult(2,col[2]) ^ GFMult(3,col[3]));
         resultingCol[3] = reduce(GFMult(3,col[0]) ^ col[1] ^ col[2] ^ GFMult(2,col[3]));
 
-        if(resultingCol[3] == 282){
-            resultingCol[3] = 01;
+        for(int i=0;i<4;i++){
+            if(resultingCol[i] == 282){
+                resultingCol[i] = 01;
+
+            }else if(resultingCol[i] == 270){
+                resultingCol[i] = 21;
+
+            }else if(resultingCol[i] == 256){
+                resultingCol[i] = 27;
+
+            }
         }
         return resultingCol;
     }
