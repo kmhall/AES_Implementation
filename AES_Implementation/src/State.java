@@ -102,6 +102,10 @@ public class State extends Matrix{
         resultingCol[1] = reduce(col[0] ^ GFMult(2,col[1]) ^ GFMult(3,col[2]) ^ col[3]);
         resultingCol[2] = reduce(col[0] ^ col[1] ^ GFMult(2,col[2]) ^ GFMult(3,col[3]));
         resultingCol[3] = reduce(GFMult(3,col[0]) ^ col[1] ^ col[2] ^ GFMult(2,col[3]));
+
+        if(resultingCol[3] == 282){
+            resultingCol[3] = 01;
+        }
         return resultingCol;
     }
 

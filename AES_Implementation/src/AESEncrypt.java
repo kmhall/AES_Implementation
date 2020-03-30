@@ -17,6 +17,8 @@ public class AESEncrypt {
         curState.addRoundKey(roundKey);
 
         for (int i = 1; i < 10; i++){
+            System.out.println("Round: "+ i);
+
             curState.subBytes();
             curState.shiftRows();
             if (i == 4) {
