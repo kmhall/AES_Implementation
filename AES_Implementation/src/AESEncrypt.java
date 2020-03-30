@@ -9,42 +9,35 @@ public class AESEncrypt {
     }
 
     void encrypt(){
-        String output; State after;
-        //output = "3925841d02dc09fbdc118597196a0b32";
-        //after = new State(output);
-
-        String output2 = "69c4e0d86a7b0430d8cdb78070b4c55a";
-        after = new State(output2);
 
         int[][] roundKey = cipherKey.getSpecificRoundKey(0);
+
+        System.out.println("round[ 0].input     " + curState.printAsHexOneLine());
+        System.out.println("round[ 0].k_sch     " + cipherKey.printAsHexOneLine(0));
         curState.addRoundKey(roundKey);
+        System.out.println("round[ 1].start     " + curState.printAsHexOneLine());
 
         for (int i = 1; i < 10; i++){
-            System.out.println("Round: "+ i);
-
             curState.subBytes();
+            System.out.println("round[ "+ i+"].s_box     " + curState.printAsHexOneLine());
             curState.shiftRows();
-
-            //curState.printAsHex();
-
+            System.out.println("round[ "+ i+"].s_row     " + curState.printAsHexOneLine());
             curState.mixColumns();
-
-            //curState.printAsHex();
-
+            System.out.println("round[ "+ i+"].m_col     " + curState.printAsHexOneLine());
+            System.out.println("round[ "+ i+"].k_sch     " + cipherKey.printAsHexOneLine(i));
             roundKey = cipherKey.getSpecificRoundKey(i);
             curState.addRoundKey(roundKey);
-
-            curState.printAsHex();
-
         }
-
+        System.out.println("round[ "+ 10+"].start    " + curState.printAsHexOneLine());
         curState.subBytes();
+        System.out.println("round[ "+ 10+"].s_box    " + curState.printAsHexOneLine());
         curState.shiftRows();
+        System.out.println("round[ "+ 10+"].s_row    " + curState.printAsHexOneLine());
+        System.out.println("round[ "+10+"].k_sch    " + cipherKey.printAsHexOneLine(10));
+
         roundKey = cipherKey.getSpecificRoundKey(10);
         curState.addRoundKey(roundKey);
-
-        System.out.println("Encryption: " + curState.equals(after));
-        //testEncrypt();
+        System.out.println("round[ "+ 10+"].output   " + curState.printAsHexOneLine());
     }
 
     void testEncrypt(){
