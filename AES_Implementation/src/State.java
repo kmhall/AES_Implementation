@@ -140,8 +140,6 @@ public class State extends Matrix{
         return dividend;
     }
 
-
-
     public int subBytesHelper(String s){
         switch (s){
             case "0":
@@ -210,28 +208,23 @@ public class State extends Matrix{
     }
 
     public void invMixCol(){
-        Matrix invPolys = new Matrix("0e090d0b0b0e090d0d0b0e09090d0b0e");
-        int s0col;
-        int s1col;
-        int s2col;
-        int s3col;
-
-        for(int col = 0; col< 4; col++){
-            s0col = matrix[0][col];
-            s1col = matrix[1][col];
-            s2col = matrix[2][col];
-            s3col = matrix[3][col];
-            for(int mixRow = 0; mixRow< 4; mixRow++){
-                matrix[mixRow][col] = invMixColHelper(invPolys.matrix[mixRow][0],invPolys.matrix[mixRow][1],invPolys.matrix[mixRow][2],invPolys.matrix[mixRow][3],
-                        s0col,s1col,s2col,s3col);
-            }
+        //Matrix multiplication
+        for(int i = 0; i<4;i++){
+            int col[] = super.getColumn(i);
+            int mixColResult[] = invMixColumnsHelper(col);
+            super.replaceCol(i, mixColResult);
         }
     }
 
-    public int invMixColHelper(int hex1, int hex2, int hex3, int hex4, int s0col, int s1col, int s2col, int s3col){
-        // hex1 * s1col and so on
+    public int[] invMixColumnsHelper(int[] col){
+        int[] resultingCol = new int[4];
 
-        int result = 0;
-        return result;
+        resultingCol[0] = reduce(GFMult(14,col[0]) ^ GFMult(11,col[1]) ^ GFMult(13,col[2]) ^ GFMult(9,col[3]));
+        resultingCol[1] = reduce(GFMult(9,col[0]) ^ GFMult(14,col[1]) ^ GFMult(11,col[2]) ^ GFMult(13,col[3]));
+        resultingCol[2] = reduce(GFMult(13,col[0]) ^ GFMult(9,col[1]) ^ GFMult(14,col[2]) ^ GFMult(11,col[3]));
+        resultingCol[3] = reduce(GFMult(11,col[0]) ^ GFMult(13,col[1]) ^ GFMult(9,col[2]) ^ GFMult(14,col[3]));
+        return resultingCol;
     }
+
+
 }
