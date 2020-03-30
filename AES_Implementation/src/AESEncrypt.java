@@ -19,7 +19,13 @@ public class AESEncrypt {
         for (int i = 1; i < 10; i++){
             curState.subBytes();
             curState.shiftRows();
+            if (i == 4) {
+                curState.printAsHex();
+            }
             curState.mixColumns();
+            if (i == 4) {
+                curState.printAsHex();
+            }
             roundKey = cipherKey.getSpecificRoundKey(i);
             curState.addRoundKey(roundKey);
         }
