@@ -15,14 +15,14 @@ public class Main {
         String cipherKey2 = "000102030405060708090a0b0c0d0e0f";
 
         AESEncrypt b = new AESEncrypt(input2,cipherKey2);
-        b.encrypt();
+        //b.encrypt();
 
         // Deliverable two
-        String key = "30 31 32 33 34 35 36 37 38 39 3A 3B 3C 3D 3E 3F";
-        String cipherText = "F4 35 15 03 AA 78 1C 52 02 67 D6 90 C4 2D 1F 43";
+        String key = "000102030405060708090a0b0c0d0e0f";
+        String cipherText = "69c4e0d86a7b0430d8cdb78070b4c55a";
 
-        //AESDecrypt b = new AESDecrypt(key, cipherText);
-        //b.decrypt();
+        AESDecrypt a = new AESDecrypt(key, cipherText);
+        a.decrypt();
     }
 
 }

@@ -8,7 +8,32 @@ public class AESDecrypt {
     }
 
     void decrypt(){
-        testDecrypt();
+        String output; State after;
+
+        output = "00112233445566778899aabbccddeeff";
+        after = new State(output);
+
+        int[][] roundKey = cipherKey.getSpecificRoundKey(10);
+        curState.addRoundKey(roundKey);
+
+        for (int i = 1; i < 10; i++){
+            System.out.println("Round: "+ i);
+
+            curState.invSubBytes();
+            curState.invShiftRows();
+            roundKey = cipherKey.getSpecificRoundKey(10 - i);
+            curState.addRoundKey(roundKey);
+            curState.invMixCol();
+            curState.printAsHex();
+        }
+
+        curState.invSubBytes();
+        curState.invShiftRows();
+        roundKey = cipherKey.getSpecificRoundKey(0);
+        curState.addRoundKey(roundKey);
+
+        System.out.println("Decryption: " + curState.equals(after));
+        //testDecrypt();
     }
 
     void testDecrypt(){
