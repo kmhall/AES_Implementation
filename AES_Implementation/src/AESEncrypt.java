@@ -36,7 +36,7 @@ public class AESEncrypt {
 
         roundKey = cipherKey.getSpecificRoundKey(10);
         curState.addRoundKey(roundKey);
-        System.out.println("round[ "+ 10+"].output   " + curState.printAsHexOneLine());
+        System.out.println("round[ "+ 10+"].ioutput   " + curState.printAsHexOneLine());
     }
 
     void testEncrypt(){

@@ -10,26 +10,38 @@ public class AESDecrypt {
     void decrypt(){
         String output; State after;
 
-        output = "32 43 f6 a8 88 5a 30 8d 31 31 98 a2 e0 37 07 34";
-        after = new State(output);
+        //output = "32 43 f6 a8 88 5a 30 8d 31 31 98 a2 e0 37 07 34";
+        //output = "00112233445566778899aabbccddeeff";
+
+        System.out.println("round[ 0].iinput     " + curState.printAsHexOneLine());
+        System.out.println("round[ 0].ik_sch     " + cipherKey.printAsHexOneLine(10));
 
         int[][] roundKey = cipherKey.getSpecificRoundKey(10);
         curState.addRoundKey(roundKey);
+        System.out.println("round[ 1].istart     " + curState.printAsHexOneLine());
 
         for (int i = 1; i < 10; i++){
             curState.invSubBytes();
+            System.out.println("round[ "+ i+"].is_box     " + curState.printAsHexOneLine());
             curState.invShiftRows();
+            System.out.println("round[ "+ i+"].is_row     " + curState.printAsHexOneLine());
             roundKey = cipherKey.getSpecificRoundKey(10 - i);
             curState.addRoundKey(roundKey);
             curState.invMixCol();
+            System.out.println("round[ "+ i+"].im_col     " + curState.printAsHexOneLine());
+            System.out.println("round[ "+ i+"].ik_sch     " + cipherKey.printAsHexOneLine(i));
         }
 
+        System.out.println("round[ "+ 10+"].istart    " + curState.printAsHexOneLine());
         curState.invSubBytes();
+        System.out.println("round[ "+ 10+"].is_box    " + curState.printAsHexOneLine());
         curState.invShiftRows();
+        System.out.println("round[ "+ 10+"].is_row    " + curState.printAsHexOneLine());
+        System.out.println("round[ "+10+"].ik_sch    " + cipherKey.printAsHexOneLine(0));
         roundKey = cipherKey.getSpecificRoundKey(0);
         curState.addRoundKey(roundKey);
 
-        System.out.println("Decryption: " + curState.equals(after));
+        System.out.println("round[ "+ 10+"].ioutput   " + curState.printAsHexOneLine());
         //testDecrypt();
     }
 
