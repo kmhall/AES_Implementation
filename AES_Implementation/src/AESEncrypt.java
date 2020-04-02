@@ -14,9 +14,9 @@ public class AESEncrypt {
         System.out.println("round[ 0].input     " + curState.printAsHexOneLine());
         System.out.println("round[ 0].k_sch     " + cipherKey.printAsHexOneLine(0));
         curState.addRoundKey(roundKey);
-        System.out.println("round[ 1].start     " + curState.printAsHexOneLine());
 
         for (int i = 1; i < 10; i++){
+            System.out.println("round[ "+ i+"].start     " + curState.printAsHexOneLine());
             curState.subBytes();
             System.out.println("round[ "+ i+"].s_box     " + curState.printAsHexOneLine());
             curState.shiftRows();

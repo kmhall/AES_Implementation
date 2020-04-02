@@ -18,15 +18,19 @@ public class Main {
         /****************/
         System.out.println();
 
-        // Deliverable two
         String key = "000102030405060708090a0b0c0d0e0f";
         String cipherText = "69c4e0d86a7b0430d8cdb78070b4c55a";
 
-        //String key = "2b 7e 15 16 28 ae d2 a6 ab f7 15 88 09 cf 4f 3c";
-        //String cipherText = "3925841d02dc09fbdc118597196a0b32";
+
 
         AESDecrypt b = new AESDecrypt(key, cipherText);
         b.decrypt();
+
+        // Deliverable two
+        String key2 = "30 31 32 33  34 35 36 37  38 39 3A 3B  3C 3D 3E 3F";
+        String cipherText2 = "F4 35 15 03  AA 78 1C 52  02 67 D6 90  C4 2D 1F 43";
+        AESDecrypt c = new AESDecrypt(key2, cipherText2);
+        c.decrypt();
     }
 
 }
