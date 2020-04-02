@@ -18,9 +18,10 @@ public class AESDecrypt {
 
         int[][] roundKey = cipherKey.getSpecificRoundKey(10);
         curState.addRoundKey(roundKey);
-        System.out.println("round[ 1].istart     " + curState.printAsHexOneLine());
 
         for (int i = 1; i < 10; i++){
+            System.out.println("round[ "+ i+"].istart     " + curState.printAsHexOneLine());
+
             curState.invSubBytes();
             System.out.println("round[ "+ i+"].is_box     " + curState.printAsHexOneLine());
             curState.invShiftRows();
