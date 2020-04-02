@@ -9,7 +9,6 @@ public class AESEncrypt {
     }
 
     void encrypt(){
-
         int[][] roundKey = cipherKey.getSpecificRoundKey(0);
 
         System.out.println("round[ 0].input     " + curState.printAsHexOneLine());
